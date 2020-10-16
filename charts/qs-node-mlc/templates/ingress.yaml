@@ -18,8 +18,8 @@ metadata:
 {{- if .Release.Name }}
     hlm-release-name: "{{ .Release.Name }}"
 {{- end }}
-{{- if .Value.service.previewNamespace }}
-    hlm-service-previewnamespace: "{{ .Value.service.previewNamespace }}"
+{{- if .Value.service.dummy }}
+    hlm-service-previewnamespace: "{{ .Value.service.dummy }}"
 {{- end }}
 
 spec:

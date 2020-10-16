@@ -46,6 +46,7 @@ canary:
 
 service:
   name: qs-node-mlc
+  dummy: dumb
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
