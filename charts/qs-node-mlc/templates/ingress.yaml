@@ -4,6 +4,10 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    helper-host: {{ template "host" . }}
+{{- if .Values.service.previewNamespace -}}
+    service-preview-amespace: {{ .Values.service.previewNamespace }}
+{{- end }}
 {{- if eq "NodePort" .Values.jxRequirements.ingress.serviceType }}
     jenkins.io/host: "{{ .Values.jxRequirements.ingress.domain }}"
 {{- end }}
