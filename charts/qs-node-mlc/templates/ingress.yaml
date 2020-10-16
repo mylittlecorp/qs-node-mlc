@@ -14,6 +14,14 @@ metadata:
 {{ toYaml .Values.jxRequirements.ingress.annotations | indent 4 }}
 {{- end }}
   name: {{ .Values.service.name }}
+  labels:
+{{- if .Release.Name }}
+    hlm-release-name: "{{ .Release.Name }}"
+{{- end }}
+{{- if .Value.service.previewNamespace }}
+    hlm-service-previewnamespace: "{{ .Value.service.previewNamespace }}"
+{{- end }}
+
 spec:
   rules:
   - http:
