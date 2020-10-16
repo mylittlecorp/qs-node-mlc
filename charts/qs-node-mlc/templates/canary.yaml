@@ -55,5 +55,5 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - {{ .Values.canary.host | template "host" . }}
+    - {{ .Values.canary.host | default (printf "%s%s%s"  .Values.service.name .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain) }}
 {{- end }}
