@@ -19,7 +19,7 @@ metadata:
 {{ toYaml .Values.ingress.annotations | indent 4 }}
 {{- end }}
 {{- if .Values.jxRequirements.ingress.annotations }}
-{{ toYaml .Values.jxRequirements.ingress.annotations | indent 4 }
+{{ toYaml .Values.jxRequirements.ingress.annotations | indent 4 }}
 {{- end }}
   name: {{ .Values.service.name }}
 spec:
