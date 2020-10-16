@@ -19,5 +19,6 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 Host.
 */}}
 {{- define "host" -}}
-{{- printf "preview-sn-%s%s%s" .Values.service.previewNamespace .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
+{{- $host := default .Values.service.previewNamespace .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
+{{- printf "host-%s" $host -}}
 {{- end -}}
