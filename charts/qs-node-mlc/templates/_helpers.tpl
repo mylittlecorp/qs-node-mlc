@@ -20,7 +20,7 @@ Host.
 */}}
 {{- define "host" -}}
 {{- if .Values.service.previewNamespace -}}
-{{- printf "%s%s%s" .Values.service.previewNamespace .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
+{{- printf "preview-sn-%s%s%s" .Values.service.previewNamespace .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
 {{- else -}}
-{{- printf "%s%s%s" .Values.service.name .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
+{{- printf "no-preview-sn-%s%s%s" .Values.service.name .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
 {{- end -}}
