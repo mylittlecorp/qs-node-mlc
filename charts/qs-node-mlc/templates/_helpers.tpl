@@ -14,3 +14,13 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Host.
+*/}}
+{{- define "host" -}}
+{{- if .Values.service.previewNamespace -}}
+{{- printf "%s%s%s" .Values.service.previewNamespace .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
+{{- else -}}
+{{- printf "%s%s%s" .Values.service.name .Values.jxRequirements.ingress.namespaceSubDomain .Values.jxRequirements.ingress.domain -}}
+{{- end -}}
