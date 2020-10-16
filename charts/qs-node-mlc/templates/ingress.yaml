@@ -21,10 +21,6 @@ metadata:
 {{- if .Values.service.previewNamespace }}
     hlm-service-previewnamespace: "{{ .Values.service.previewNamespace }}"
 {{- end }}
-    hlm-service-dummy: "{{ .Values.service.dummy }}"
-    {{- $dummyTxt := .Values.service.dummy .Values.service.name -}}
-    hlm-service-default-inexistant-or-dummy: "{{ default .Values.service.dummy .Values.service.inexistant }}"
-    hlm-service-default-inexistant-or-dummyTxt: "{{ default $dummyTxt .Values.service.previewNamespace }}"
 
 spec:
   rules:
@@ -36,12 +32,20 @@ spec:
 {{- if eq "NodePort" .Values.jxRequirements.ingress.serviceType }}
         path: "/{{ .Release.Namespace }}/hook"
 {{- else if .Values.jxRequirements.ingress.domain }}
+{{- if .Values.service.previewNamespace }}
+    host: {{ .Values.service.previewNamespace }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+{{- else }}
     host: {{ .Values.service.name }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+{{- end }}
 {{- end }}
 {{- if .Values.jxRequirements.ingress.tls.enabled }}
   tls:
   - hosts:
+{{- if .Values.service.previewNamespace }}
+    - {{ .Values.service.previewNamespace }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+{{- else }}
     - {{ .Values.service.name }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+{{- end }}
 {{- if hasKey .Values.jxRequirements.ingress.tls "secretName" }}
     secretName: "{{ .Values.jxRequirements.ingress.tls.secretName }}"
 {{- else if .Values.jxRequirements.ingress.tls.production }}
