@@ -261,6 +261,14 @@ spec:
           name: build-container-build
           resources: {}
         - args:
+          - cat /workspace/source/.jx/variables.sh
+          command:
+          - /bin/bash
+          - -c
+          image: gcr.io/jenkinsxio/jx-cli:latest
+          name: promote-cat-variables-sh
+          resources: {}
+        - args:
           - source /workspace/source/.jx/variables.sh && jx preview create
           command:
           - /bin/bash
