@@ -3,4 +3,4 @@ image:
   tag: "{{ requiredEnv "VERSION" }}"
 
 service:
-  name: "{{ requiredEnv "PREVIEW_NAMESPACE" }}"
+  previewNamespace: "{{ requiredEnv "PREVIEW_NAMESPACE" }}"
