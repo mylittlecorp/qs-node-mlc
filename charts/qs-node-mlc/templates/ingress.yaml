@@ -22,9 +22,9 @@ metadata:
     hlm-service-previewnamespace: "{{ .Values.service.previewNamespace }}"
 {{- end }}
     hlm-service-dummy: "{{ .Values.service.dummy }}"
-    hlm-service-default-pn-or-dummy: "{{ .Values.service.dummy .Values.service.name | .Values.service.previewNamespace }}"
-    hlm-service-default-dummy-or-pn: "{{ .Values.service.previewNamespace | .Values.service.dummy .Values.service.name }}"
+    {{- $dummyTxt := .Values.service.dummy .Values.service.name -}}
     hlm-service-default-inexistant-or-dummy: "{{ default .Values.service.dummy .Values.service.inexistant }}"
+    hlm-service-default-inexistant-or-dummyTxt: "{{ default $dummyTxt .Values.service.previewNamespace }}"
 
 spec:
   rules:
