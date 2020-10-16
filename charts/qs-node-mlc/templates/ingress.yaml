@@ -21,7 +21,7 @@ metadata:
 {{- if .Values.service.previewNamespace }}
     hlm-service-previewnamespace: "{{ .Values.service.previewNamespace }}"
 {{- end }}
-
+    {{ include "fullname" . | default(.Value.service.name .Value.service.dummy) }}
 spec:
   rules:
   - http:
