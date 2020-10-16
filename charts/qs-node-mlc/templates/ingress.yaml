@@ -14,13 +14,6 @@ metadata:
 {{ toYaml .Values.jxRequirements.ingress.annotations | indent 4 }}
 {{- end }}
   name: {{ .Values.service.name }}
-  labels:
-{{- if .Values.service.previewNamespace -}}
-    service-preview-namespace: "{{ .Values.service.previewNamespace }}"
-{{- else -}}
-    service-preview-namespace: "unknow"
-{{- end }}
-    release-name: "{{ .Release.Name }}"
 spec:
   rules:
   - http:
